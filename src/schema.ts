@@ -7,33 +7,15 @@ const typeDefs = gql`
   }
 
   type Mutation {
-    signIn(input: signInInput): SignInResponse
+    signIn(input: signInInput!): SignInResponse
     createAnimal(input: createAnimalInput): Animal
-  }
-
-  input signInInput {
-    email: String!
-    password: String!
+    updateAnimal(id: ID!, input: createAnimalInput): Animal
+    deleteAnimal(id: ID!): Animal
   }
 
   type SignInResponse {
     auhtenticated: Boolean!
     token: String
-  }
-
-  input createAnimalInput {
-    imageUrl: String!
-    popularName: String!
-    scientificName: String!
-    foodType: FoodTypeEnum!
-    isInExtinction: Boolean!
-    lifeWaitInYears: String!
-    mediumHeight: Float!
-    generalDescription: String!
-    mediumWeight: Float!
-    appearsInUrbanLocations: Boolean!
-    foodDescription: String
-    heatMapWhereLivesImageUrl: String
   }
 
   type Animal {
@@ -43,10 +25,10 @@ const typeDefs = gql`
     scientificName: String!
     foodType: FoodTypeEnum!
     isInExtinction: Boolean!
-    lifeWaitInYears: String!
-    mediumHeight: Float!
+    lifeWait: String!
+    mediumHeightMeters: Float!
     generalDescription: String!
-    mediumWeight: Float!
+    mediumWeightKg: Float!
     appearsInUrbanLocations: Boolean!
     foodDescription: String
     heatMapWhereLivesImageUrl: String
@@ -56,6 +38,26 @@ const typeDefs = gql`
     herbivoro,
     carnivoro,
     onivoro
+  }
+
+  input signInInput {
+    email: String! @constraint(format: "email")
+    password: String!
+  }
+
+  input createAnimalInput {
+    imageUrl: String!
+    popularName: String! @constraint(maxLength: 50)
+    scientificName: String! @constraint(maxLength: 100)
+    foodType: FoodTypeEnum!
+    isInExtinction: Boolean!
+    lifeWait: String! @constraint(maxLength: 16)
+    mediumHeightMeters: Float! @constraint(max: 100)
+    generalDescription: String! @constraint(maxLength: 1800)
+    mediumWeightKg: Float! @constraint(max: 160000)
+    appearsInUrbanLocations: Boolean!
+    foodDescription: String @constraint(maxLength: 1000)
+    heatMapWhereLivesImageUrl: String
   }
 `
 

@@ -1,18 +1,21 @@
 import { ApolloError, ApolloServer } from 'apollo-server'
 import { GraphQLFormattedError } from 'graphql'
 import { makeExecutableSchema } from '@graphql-tools/schema'
+import { constraintDirective, constraintDirectiveTypeDefs } from 'graphql-constraint-directive'
 
+import { db } from './core/db'
 import { typeDefs } from './schema'
 import { resolvers } from './resolvers'
-import { db } from './core/db'
 import { validateUserAuthToken } from './shared/validateUserAuthToken'
 
-const schema = makeExecutableSchema({
+let schema = makeExecutableSchema({
   typeDefs: [
-    typeDefs
+    typeDefs,
+    constraintDirectiveTypeDefs
   ],
   resolvers
 })
+schema = constraintDirective()(schema)
 
 const server = new ApolloServer({
   schema,
@@ -27,7 +30,6 @@ const server = new ApolloServer({
     return { isAuthenticatedUser, db }
   },
   formatError: (err): GraphQLFormattedError => {
-    console.log('err', err)
     if (err.extensions.code === 'INTERNAL_SERVER_ERROR') {
       return new ApolloError('We are having some trouble', 'ERROR')
     }

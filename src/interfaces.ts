@@ -1,5 +1,5 @@
-
 import { Model } from 'mongoose'
+
 export interface IUser {
   email: string;
   password: string;
@@ -12,9 +12,9 @@ export interface IAnimal {
   scientificName: string;
   foodType: 'herbivoro' | 'carnivoro' | 'onivoro';
   isInExtinction: boolean;
-  lifeWaitInYears: string;
-  mediumHeight: number;
-  mediumWeight: number;
+  lifeWait: string;
+  mediumHeightMeters: number;
+  mediumWeightKg: number;
   generalDescription: string;
   appearsInUrbanLocations: boolean;
   foodDescription?: string;
@@ -40,3 +40,29 @@ export interface ISignInResponse {
 }
 
 export type ICreateAnimalInput = Omit<IAnimal, 'id'>
+
+export interface IUpdateAnimalInput {
+  id: string;
+  input: {
+    imageUrl?: string;
+    popularName?: string;
+    scientificName?: string;
+    foodType?: 'herbivoro' | 'carnivoro' | 'onivoro';
+    isInExtinction?: boolean;
+    lifeWait?: string;
+    mediumHeightMeters?: number;
+    mediumWeightKg?: number;
+    generalDescription?: string;
+    appearsInUrbanLocations?: boolean;
+    foodDescription?: string;
+    heatMapWhereLivesImageUrl?: string
+  }
+}
+
+export interface MongooseError {
+  code: number;
+  keyValue: string;
+}
+export interface ErrorCodeMapper {
+  [key: number]: () => string[];
+}

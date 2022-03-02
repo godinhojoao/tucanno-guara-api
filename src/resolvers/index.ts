@@ -1,6 +1,5 @@
 import { signIn } from './mutations/SignIn'
-
-import { createAnimal } from './mutations/Animals'
+import { createAnimal, updateAnimal, deleteAnimal } from './mutations/Animals'
 import { getAnimals, getAnimal } from './queries/Animals'
 
 const resolvers = {
@@ -10,7 +9,9 @@ const resolvers = {
   },
   Mutation: {
     signIn,
-    createAnimal
+    createAnimal,
+    updateAnimal,
+    deleteAnimal
   }
 }
 

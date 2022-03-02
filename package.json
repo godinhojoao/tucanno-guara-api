@@ -4,8 +4,9 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "start-dev": "nodemon --watch 'src/' --exec 'ts-node src/app.ts' -e ts",
-    "start-prod": "tsc && node dist/src/app.js",
+    "start-dev": "NODE_ENV=dev nodemon --watch 'src/' --exec 'ts-node src/app.ts' -e ts",
+    "start-prod": "tsc && NODE_ENV=prod node dist/src/app.js",
+    "seed-db": "NODE_ENV=dev ts-node seeds/index",
     "build": "tsc",
     "lint": "npx eslint ."
   },
@@ -25,6 +26,7 @@
     "apollo-server": "^3.6.1",
     "bcrypt": "^5.0.1",
     "graphql": "^16.2.0",
+    "graphql-constraint-directive": "^3.0.0",
     "jsonwebtoken": "^8.5.1",
     "mongoose": "^6.2.3"
   },

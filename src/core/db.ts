@@ -1,10 +1,11 @@
 import { connect } from 'mongoose'
 
+import config from './../../config'
 import { User } from './../model/User'
 import { Animal } from './../model/Animal'
 
 (async function () {
-  await connect('mongodb://localhost:27017/test')
+  await connect(config.dbConnectionUrl)
 })()
 
 const db = {

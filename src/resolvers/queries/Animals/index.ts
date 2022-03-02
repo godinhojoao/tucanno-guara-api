@@ -1,3 +1,4 @@
+import { Types } from 'mongoose'
 import { ApolloError } from 'apollo-server'
 import { IAnimal, IContext } from '../../../interfaces'
 
@@ -8,25 +9,7 @@ const getAnimals = async (
 ): Promise<IAnimal[]> => {
   try {
     const animals = await Animal.find()
-    console.log('animals', animals)
-
-    return [
-      {
-        id: '1dasmdoksa',
-        imageUrl: 'dale',
-        popularName: 'string',
-        scientificName: 'string',
-        foodType: 'herbivoro',
-        isInExtinction: true,
-        lifeWaitInYears: '12 à 13 anos',
-        mediumHeight: 12,
-        mediumWeight: 12,
-        generalDescription: 'string',
-        appearsInUrbanLocations: false,
-        foodDescription: 'string',
-        heatMapWhereLivesImageUrl: 'string'
-      }
-    ]
+    return animals as IAnimal[]
   } catch (error) {
     return []
   }
@@ -38,24 +21,11 @@ const getAnimal = async (
   { db: { Animal } }: IContext
 ): Promise<IAnimal | ApolloError> => {
   try {
-    const animal = await Animal.findById(id)
-    console.log('animal', animal)
+    const isValidObjectId = Types.ObjectId.isValid(id)
+    if (!isValidObjectId) { return new ApolloError('invalid id', 'invalid') }
 
-    return {
-      id: '1dasmdoksa',
-      imageUrl: 'dale',
-      popularName: 'string',
-      scientificName: 'string',
-      foodType: 'herbivoro',
-      isInExtinction: true,
-      lifeWaitInYears: '12 à 13 anos',
-      mediumHeight: 12,
-      mediumWeight: 12,
-      generalDescription: 'string',
-      appearsInUrbanLocations: false,
-      foodDescription: 'string',
-      heatMapWhereLivesImageUrl: 'string'
-    }
+    const animal = await Animal.findById(id)
+    return animal as IAnimal
   } catch (error) {
     return new ApolloError('animal not found', 'not found')
   }

@@ -1,6 +1,6 @@
 import { verify } from 'jsonwebtoken'
 
-import { config } from './../../config'
+import config from './../../config'
 
 function validateJwtTokenFormat (scheme: string, token: string) {
   if (!scheme || !token) { return false }
