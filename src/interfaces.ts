@@ -10,9 +10,11 @@ export interface IAnimal {
   imageUrl: string;
   popularName: string;
   scientificName: string;
-  foodType: 'herbivoro' | 'carnivoro' | 'onivoro';
+  foodType: 'herbivore' | 'carnivore' | 'omnivorous';
   isInExtinction: boolean;
-  lifeWait: string;
+  lifeWaitMax: number;
+  lifeWaitMin: number;
+  lifeWaitMeasurementUnity: 'day' | 'month' | 'year';
   mediumHeightMeters: number;
   mediumWeightKg: number;
   generalDescription: string;
@@ -47,9 +49,12 @@ export interface IUpdateAnimalInput {
     imageUrl?: string;
     popularName?: string;
     scientificName?: string;
-    foodType?: 'herbivoro' | 'carnivoro' | 'onivoro';
+    foodType?: 'herbivore' | 'carnivore' | 'omnivorous';
     isInExtinction?: boolean;
-    lifeWait?: string;
+    lifeWaitMax: number;
+    lifeWaitMin: number;
+    lifeWaitMeasurementUnity: 'day' | 'month' | 'year';
+    biome: 'caatinga' | 'cerrado' | 'pampa' | 'pantanal' | 'mata atlantica' | 'amazonia';
     mediumHeightMeters?: number;
     mediumWeightKg?: number;
     generalDescription?: string;

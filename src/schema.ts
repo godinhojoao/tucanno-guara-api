@@ -25,7 +25,10 @@ const typeDefs = gql`
     scientificName: String!
     foodType: FoodTypeEnum!
     isInExtinction: Boolean!
-    lifeWait: String!
+    lifeWaitMax: Int!
+    lifeWaitMin: Int!
+    lifeWaitMeasurementUnity: LifeWaitMeasurementUnityEnum!
+    biome: BiomeEnum
     mediumHeightMeters: Float!
     generalDescription: String!
     mediumWeightKg: Float!
@@ -35,9 +38,24 @@ const typeDefs = gql`
   }
 
   enum FoodTypeEnum {
-    herbivoro,
-    carnivoro,
-    onivoro
+    herbivore,
+    carnivore,
+    omnivorous
+  }
+
+  enum LifeWaitMeasurementUnityEnum {
+    day,
+    month,
+    year
+  }
+
+  enum BiomeEnum {
+    caatinga,
+    cerrado,
+    pampa,
+    amazonia,
+    mata atlantica,
+    pantanal
   }
 
   input signInInput {
@@ -51,7 +69,10 @@ const typeDefs = gql`
     scientificName: String! @constraint(maxLength: 100)
     foodType: FoodTypeEnum!
     isInExtinction: Boolean!
-    lifeWait: String! @constraint(maxLength: 16)
+    lifeWaitMax: Int!
+    lifeWaitMin: Int!
+    lifeWaitMeasurementUnity: LifeWaitMeasurementUnityEnum!
+    biome: BiomeEnum
     mediumHeightMeters: Float! @constraint(max: 100)
     generalDescription: String! @constraint(maxLength: 1800)
     mediumWeightKg: Float! @constraint(max: 160000)

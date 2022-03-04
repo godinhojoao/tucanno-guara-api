@@ -7,11 +7,22 @@ const AnimalSchema: Schema = new Schema({
   scientificName: { type: String, required: true, unique: true },
   foodType: {
     type: String,
-    enum: ['herbivoro', 'carnivoro', 'onivoro'],
+    enum: ['herbivore', 'carnivore', 'omnivorous'],
     required: true
   },
   isInExtinction: { type: Boolean, required: true },
-  lifeWait: { type: String, required: true },
+  lifeWaitMin: { type: Number, required: true },
+  lifeWaitMax: { type: Number, required: true },
+  lifeWaitMeasurementUnity: {
+    type: String,
+    enum: ['day', 'month', 'year'],
+    required: true
+  },
+  biome: {
+    type: String,
+    enum: ['caatinga', 'cerrado', 'pampa', 'pantanal', 'mata atlantica', 'amazonia'],
+    required: true
+  },
   mediumHeightMeters: { type: Number, required: true },
   mediumWeightKg: { type: Number, required: true },
   generalDescription: { type: String, required: true },
