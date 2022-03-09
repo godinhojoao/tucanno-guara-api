@@ -4,7 +4,6 @@ import { compare } from 'bcrypt'
 
 import { User } from '../../../model/User'
 import { ISignInInput, ISignInResponse } from '../../../interfaces'
-import config from '../../../../config'
 
 const signIn = async (
   _: unknown,
@@ -16,7 +15,7 @@ const signIn = async (
   const isValidPassword = await compare(password, currentUser.password)
   if (!isValidPassword) { return new ApolloError('invalid email or password', 'invalid') }
 
-  const token = sign({ email }, config.auth.jwtSecret, { expiresIn: config.auth.tokenExpirationTime })
+  const token = sign({ email }, process.env.JWT_SECRET as string, { expiresIn: process.env.TOKEN_EXPIRATION_TIME as string })
   return { auhtenticated: true, token }
 }
 

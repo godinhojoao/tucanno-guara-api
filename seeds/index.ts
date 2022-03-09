@@ -1,11 +1,15 @@
 import { connect } from 'mongoose'
+import * as dotenv from 'dotenv'
 
-import config from './../config'
 import { usersSeed } from './users'
 import { animalsSeed } from './animals'
 
+dotenv.config({
+  path: process.env.NODE_ENV === 'dev' ? '.env.test' : '.env'
+});
+
 (async function () {
-  const db = await connect(config.dbConnectionUrl)
+  const db = await connect(process.env.DB_CONNECTION_URL as string)
 
   async function runSeeds (): Promise<void> {
     await usersSeed()

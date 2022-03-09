@@ -72,7 +72,7 @@ const typeDefs = gql`
     lifeWaitMax: Int!
     lifeWaitMin: Int!
     lifeWaitMeasurementUnity: LifeWaitMeasurementUnityEnum!
-    biome: BiomeEnum
+    biome: BiomeEnum!
     mediumHeightMeters: Float! @constraint(max: 100)
     generalDescription: String! @constraint(maxLength: 1800)
     mediumWeightKg: Float! @constraint(max: 160000)
