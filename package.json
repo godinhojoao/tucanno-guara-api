@@ -6,6 +6,7 @@
   "scripts": {
     "start-dev": "NODE_ENV=dev nodemon --watch 'src/' --exec 'ts-node src/app.ts' -e ts",
     "start-prod": "tsc && NODE_ENV=prod node dist/src/app.js",
+    "start": "node dist/src/app.js",
     "seed-db": "NODE_ENV=dev ts-node seeds/index",
     "build": "tsc",
     "lint": "npx eslint ."

@@ -16,5 +16,10 @@
       "src": "/(.*)",
       "dest": "dist/src/app.js"
     }
-  ]
+  ],
+  "env": {
+    "DB_CONNECTION_URL": "@db_connection_url",
+    "JWT_SECRET": "@jwt_secret",
+    "TOKEN_EXPIRATION_TIME": "@token_expiration_time"
+  }
 }
