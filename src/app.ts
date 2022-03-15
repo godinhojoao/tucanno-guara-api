@@ -8,6 +8,8 @@ import { typeDefs } from './schema'
 import { resolvers } from './resolvers'
 import { validateUserAuthToken } from './shared/validateUserAuthToken'
 
+const isDevMode = process.env.NODE_ENV === 'dev'
+
 let schema = makeExecutableSchema({
   typeDefs: [
     typeDefs,
@@ -19,6 +21,8 @@ schema = constraintDirective()(schema)
 
 const server = new ApolloServer({
   schema,
+  introspection: isDevMode,
+  debug: isDevMode,
   context: ({ req }) => {
     const authorizationToken = req.headers.authorization || ''
 
